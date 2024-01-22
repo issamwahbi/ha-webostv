@@ -1,4 +1,4 @@
-# For of webostv integration Home Assistant
+# webostv integration for Home Assistant
 
 ## Installation
 
