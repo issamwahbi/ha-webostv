@@ -5,7 +5,7 @@ from aiowebostv import WebOsTvCommandError
 from homeassistant.const import Platform
 from websockets.exceptions import ConnectionClosed, ConnectionClosedOK
 
-DOMAIN = "webostv2"
+DOMAIN = "lg_webos_smart_tv_issam"
 PLATFORMS = [Platform.MEDIA_PLAYER]
 DATA_CONFIG_ENTRY = "config_entry"
 DATA_HASS_CONFIG = "hass_config"
