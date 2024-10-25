@@ -1,5 +1,5 @@
 {
-  "domain": "2",
+  "domain": "lg_webos_smart_tv_issam",
   "name": "LG webOS Smart TV Issam",
   "codeowners": ["@thecode"],
   "config_flow": true,
