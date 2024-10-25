@@ -434,12 +434,17 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
             #         ]
             #     },
             # )
-            await self._client.launch_app_with_params(
-                "com.webos.app.browser",
-                {
-                    "target": media_id,
-                },
-            )
+
+            # await self._client.launch_app_with_params(
+            #     "com.webos.app.browser",
+            #     {
+            #         "target": media_id,
+            #     },
+            # )
+
+            apps = await self._client.get_apps()
+            for app in apps:
+                _LOGGER.warning(app)
 
         elif media_type == MediaType.CHANNEL:
             _LOGGER.debug("Searching channel")
