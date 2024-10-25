@@ -418,7 +418,7 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
                 payload,
             )
 
-            self._client.request(
+            await self._client.request(
                 "com.webos.applicationManager/launch",
                 {"id": "com.webos.app.music", "params": payload},
             )
