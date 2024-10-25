@@ -1,4 +1,4 @@
-# webostv integration for Home Assistant
+# webostv Issam integration for Home Assistant
 
 ## Installation
 
