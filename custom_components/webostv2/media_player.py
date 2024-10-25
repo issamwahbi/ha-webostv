@@ -408,15 +408,18 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
                         {
                             "mediaType": "MUSIC",
                             "deviceType": "DMR",
-                            "fileName": "Kalimba",
-                            "fullPath": media_id,
+                            "fileName": "Kalimba",  # Display name
+                            "fullPath": media_id,   # URL of the media file
+                            "dlnaInfo": {
+                                "protocolInfo": "http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01500000000000000000000000000000"
+                            }
                         }
                     ]
-                },
+                }
             }
 
             # Send the request to launch the Music app
-            await self._client.request("com.webos.applicationManager/launch", payload)
+            await self._client.request("system.launcher/launch", payload)
 
             # await self._client.launch_app_with_params(
             #     "com.webos.app.music",
