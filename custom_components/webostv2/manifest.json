@@ -1,7 +1,8 @@
 {
   "domain": "lg_webos_smart_tv_issam",
   "name": "LG webOS Smart TV Issam",
-  "codeowners": ["@thecode"],
+  "version": "1.0.0", 
+  "codeowners": ["@issamwahbu"],
   "config_flow": true,
   "documentation": "https://www.home-assistant.io/integrations/webostv",
   "iot_class": "local_push",
