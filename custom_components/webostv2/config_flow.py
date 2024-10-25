@@ -1,14 +1,13 @@
 """Config flow to configure webostv component."""
 from __future__ import annotations
 
-from collections.abc import Mapping
 import logging
+from collections.abc import Mapping
 from typing import Any
 from urllib.parse import urlparse
 
-from aiowebostv import WebOsTvPairError
 import voluptuous as vol
-
+from aiowebostv import WebOsTvPairError
 from homeassistant.components import ssdp
 from homeassistant.config_entries import ConfigEntry, ConfigFlow, OptionsFlow
 from homeassistant.const import CONF_CLIENT_SECRET, CONF_HOST, CONF_NAME
@@ -106,6 +105,30 @@ class FlowHandler(ConfigFlow, domain=DOMAIN):
                 return self.async_create_entry(title=self._name, data=data)
 
         return self.async_show_form(step_id="pairing", errors=errors)
+    
+    async def async_step_ssdp(self, discovery_info: ssdp.SsdpServiceInfo) -> FlowResult:
+        """Handle a flow initialized by discovery."""
+        assert discovery_info.ssdp_location
+        host = urlparse(discovery_info.ssdp_location).hostname
+        assert host
+        self._host = host
+        self._name = discovery_info.upnp.get(ssdp.ATTR_UPNP_FRIENDLY_NAME, DEFAULT_NAME)
+
+        uuid = discovery_info.upnp[ssdp.ATTR_UPNP_UDN]
+        assert uuid
+        if uuid.startswith("uuid:"):
+            uuid = uuid[5:]
+        await self.async_set_unique_id(uuid)
+        self._abort_if_unique_id_configured({CONF_HOST: self._host})
+
+        for progress in self._async_in_progress():
+            if progress.get("context", {}).get(CONF_HOST) == self._host:
+                return self.async_abort(reason="already_in_progress")
+
+        self._uuid = uuid
+        return await self.async_step_pairing()
+
+
 
     async def async_step_reauth(self, entry_data: Mapping[str, Any]) -> FlowResult:
         """Perform reauth upon an WebOsTvPairError."""
