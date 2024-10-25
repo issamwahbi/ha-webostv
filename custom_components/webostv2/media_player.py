@@ -407,7 +407,7 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
                         "fullPath": media_id,
                         "mediaType": "MUSIC",
                         "deviceType": "DMR",
-                        "fileName": "track"
+                        "fileName": "track",
                     }
                 ]
             }
@@ -420,7 +420,7 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
 
             await self._client.request(
                 "com.webos.applicationManager/launch",
-                {"id": "com.webos.app.music", "params": payload},
+                '{"id": "com.webos.app.music", "params": {"payload": [ { "mediaType": "MUSIC", "deviceType": "DMR", "fileName": "Kalimba", "fullPath": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba-online-audio-converter.com_-1.wav", "thumbnail": "", "subtitle": "", "lastPlayPosition": -1, "album": "", "artist": "", "dlnaInfo": { "protocolInfo": "http-get:*:audio\/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01500000000000000000000000000000", "contentLength": "-1", "duration": 0, "opVal": 1, "flagVal": 0, "cleartextSize": "-1"}}]}}',
             )
             # await self._client.launch_app_with_params(
             #     "com.webos.app.music",
