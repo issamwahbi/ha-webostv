@@ -402,26 +402,35 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
             #     return
 
             payload = {
-                "payload": [
-                    {
-                        "fullPath": media_id,
-                        "mediaType": "MUSIC",
-                        "deviceType": "DMR",
-                        "fileName": "track",
-                    }
-                ]
+                "id": "com.webos.app.music",
+                "params": {
+                    "payload": [
+                        {
+                            "mediaType": "MUSIC",
+                            "deviceType": "DMR",
+                            "fileName": "Kalimba",
+                            "fullPath": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba-online-audio-converter.com_-1.wav",
+                            "thumbnail": "",
+                            "subtitle": "",
+                            "lastPlayPosition": -1,
+                            "album": "",
+                            "artist": "",
+                            "dlnaInfo": {
+                                "protocolInfo": "http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01500000000000000000000000000000",
+                                "contentLength": "-1",
+                                "duration": 0,
+                                "opVal": 1,
+                                "flagVal": 0,
+                                "cleartextSize": "-1",
+                            },
+                        }
+                    ]
+                },
             }
 
-            _LOGGER.warning(
-                "%s payload: %s",
-                self._friendly_name_internal(),
-                payload,
-            )
+            # Send the request to launch the Music app
+            await self._client.request("com.webos.applicationManager/launch", payload)
 
-            await self._client.request(
-                "com.webos.applicationManager/launch",
-                '{"id": "com.webos.app.music", "params": {"payload": [ { "mediaType": "MUSIC", "deviceType": "DMR", "fileName": "Kalimba", "fullPath": "https://www.learningcontainer.com/wp-content/uploads/2020/02/Kalimba-online-audio-converter.com_-1.wav", "thumbnail": "", "subtitle": "", "lastPlayPosition": -1, "album": "", "artist": "", "dlnaInfo": { "protocolInfo": "http-get:*:audio\/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01500000000000000000000000000000", "contentLength": "-1", "duration": 0, "opVal": 1, "flagVal": 0, "cleartextSize": "-1"}}]}}',
-            )
             # await self._client.launch_app_with_params(
             #     "com.webos.app.music",
             #     {
