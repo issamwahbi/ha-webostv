@@ -393,7 +393,7 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
         """Play a piece of media."""
         _LOGGER.debug("Call play media type <%s>, Id <%s>", media_type, media_id)
 
-        if media_type == MediaType.VIDEO:
+        if media_type == MediaType.VIDEO or media_type == MediaType.MUSIC:
             if (source_dict := self._source_list.get("Media Player")) is None:
                 _LOGGER.warning(
                     "Source 'Media Player' not found for %s",
@@ -407,9 +407,9 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
                     "payload": [
                         {
                             "fullPath": media_id,
-                            "mediaType": "VIDEO",
+                            "mediaType": media_type,
                             "deviceType": "DMR",
-                            "fileName": "video",
+                            "fileName": "track",
                         }
                     ]
                 },
