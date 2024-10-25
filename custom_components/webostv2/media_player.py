@@ -393,7 +393,7 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
                     "payload": [
                         {
                             "fullPath": media_id,
-                            "mediaType": media_type,
+                            "mediaType": "MUSIC",
                             "deviceType": "DMR",
                             "fileName": "track",
                         }
