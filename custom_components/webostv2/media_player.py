@@ -380,15 +380,15 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
         _LOGGER.debug("Call play media type <%s>, Id <%s>", media_type, media_id)
 
         if media_type == MediaType.VIDEO or media_type == MediaType.MUSIC:
-            if (source_dict := self._source_list.get("Media Player")) is None:
-                _LOGGER.warning(
-                    "Source 'Media Player' not found for %s",
-                    self._friendly_name_internal(),
-                )
-                return
+            # if (source_dict := self._source_list.get("Media Player")) is None:
+            #     _LOGGER.warning(
+            #         "Source 'Media Player' not found for %s",
+            #         self._friendly_name_internal(),
+            #     )
+            #     return
 
             await self._client.launch_app_with_params(
-                source_dict["id"],
+                "com.webos.app.music",
                 {
                     "payload": [
                         {
