@@ -1,10 +1,9 @@
-"""Diagnostics support for LG webOS Smart TV."""
+"""Diagnostics support for LG webOS Smart TV Issam."""
 from __future__ import annotations
 
 from typing import Any
 
 from aiowebostv import WebOsClient
-
 from homeassistant.components.diagnostics import async_redact_data
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import CONF_CLIENT_SECRET, CONF_HOST, CONF_UNIQUE_ID

@@ -1,12 +1,11 @@
-"""Provides device automations for control of LG webOS Smart TV."""
+"""Provides device automations for control of LG webOS Smart TV Issam."""
 from __future__ import annotations
 
 import voluptuous as vol
-
-from homeassistant.components.device_automation import DEVICE_TRIGGER_BASE_SCHEMA
-from homeassistant.components.device_automation.exceptions import (
-    InvalidDeviceAutomationConfig,
-)
+from homeassistant.components.device_automation import \
+    DEVICE_TRIGGER_BASE_SCHEMA
+from homeassistant.components.device_automation.exceptions import \
+    InvalidDeviceAutomationConfig
 from homeassistant.const import CONF_DEVICE_ID, CONF_PLATFORM, CONF_TYPE
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
@@ -15,14 +14,10 @@ from homeassistant.helpers.typing import ConfigType
 
 from . import trigger
 from .const import DOMAIN
-from .helpers import (
-    async_get_client_by_device_entry,
-    async_get_device_entry_by_device_id,
-)
-from .triggers.turn_on import (
-    PLATFORM_TYPE as TURN_ON_PLATFORM_TYPE,
-    async_get_turn_on_trigger,
-)
+from .helpers import (async_get_client_by_device_entry,
+                      async_get_device_entry_by_device_id)
+from .triggers.turn_on import PLATFORM_TYPE as TURN_ON_PLATFORM_TYPE
+from .triggers.turn_on import async_get_turn_on_trigger
 
 TRIGGER_TYPES = {TURN_ON_PLATFORM_TYPE}
 TRIGGER_SCHEMA = DEVICE_TRIGGER_BASE_SCHEMA.extend(

@@ -1,42 +1,27 @@
-"""Support for LG webOS Smart TV."""
+"""Support for LG webOS Smart TV Issam."""
 from __future__ import annotations
 
-from contextlib import suppress
 import logging
+from contextlib import suppress
 
-from aiowebostv import WebOsClient, WebOsTvPairError
 import voluptuous as vol
-
+from aiowebostv import WebOsClient, WebOsTvPairError
 from homeassistant.components import notify as hass_notify
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    ATTR_COMMAND,
-    ATTR_ENTITY_ID,
-    CONF_CLIENT_SECRET,
-    CONF_HOST,
-    CONF_NAME,
-    EVENT_HOMEASSISTANT_STOP,
-)
+from homeassistant.const import (ATTR_COMMAND, ATTR_ENTITY_ID,
+                                 CONF_CLIENT_SECRET, CONF_HOST, CONF_NAME,
+                                 EVENT_HOMEASSISTANT_STOP)
 from homeassistant.core import Event, HomeAssistant, ServiceCall
 from homeassistant.exceptions import ConfigEntryAuthFailed
-from homeassistant.helpers import config_validation as cv, discovery
+from homeassistant.helpers import config_validation as cv
+from homeassistant.helpers import discovery
 from homeassistant.helpers.dispatcher import async_dispatcher_send
 from homeassistant.helpers.typing import ConfigType
 
-from .const import (
-    ATTR_BUTTON,
-    ATTR_CONFIG_ENTRY_ID,
-    ATTR_PAYLOAD,
-    ATTR_SOUND_OUTPUT,
-    DATA_CONFIG_ENTRY,
-    DATA_HASS_CONFIG,
-    DOMAIN,
-    PLATFORMS,
-    SERVICE_BUTTON,
-    SERVICE_COMMAND,
-    SERVICE_SELECT_SOUND_OUTPUT,
-    WEBOSTV_EXCEPTIONS,
-)
+from .const import (ATTR_BUTTON, ATTR_CONFIG_ENTRY_ID, ATTR_PAYLOAD,
+                    ATTR_SOUND_OUTPUT, DATA_CONFIG_ENTRY, DATA_HASS_CONFIG,
+                    DOMAIN, PLATFORMS, SERVICE_BUTTON, SERVICE_COMMAND,
+                    SERVICE_SELECT_SOUND_OUTPUT, WEBOSTV_EXCEPTIONS)
 
 CONFIG_SCHEMA = cv.removed(DOMAIN, raise_if_present=False)
 

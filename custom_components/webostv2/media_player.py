@@ -1,33 +1,25 @@
-"""Support for interface with an LG webOS Smart TV."""
+"""Support for interface with an LG webOS Smart TV Issam."""
 from __future__ import annotations
 
 import asyncio
+import logging
+import ssl
 from collections.abc import Awaitable, Callable, Coroutine
 from contextlib import suppress
 from datetime import timedelta
 from functools import wraps
 from http import HTTPStatus
-import logging
-import ssl
 from typing import Any, Concatenate, ParamSpec, TypeVar, cast
 
 from aiowebostv import WebOsClient, WebOsTvPairError
-
 from homeassistant import util
-from homeassistant.components.media_player import (
-    MediaPlayerDeviceClass,
-    MediaPlayerEntity,
-    MediaPlayerEntityFeature,
-    MediaPlayerState,
-    MediaType,
-)
+from homeassistant.components.media_player import (MediaPlayerDeviceClass,
+                                                   MediaPlayerEntity,
+                                                   MediaPlayerEntityFeature,
+                                                   MediaPlayerState, MediaType)
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.const import (
-    ATTR_ENTITY_ID,
-    ATTR_SUPPORTED_FEATURES,
-    ENTITY_MATCH_ALL,
-    ENTITY_MATCH_NONE,
-)
+from homeassistant.const import (ATTR_ENTITY_ID, ATTR_SUPPORTED_FEATURES,
+                                 ENTITY_MATCH_ALL, ENTITY_MATCH_NONE)
 from homeassistant.core import HomeAssistant
 from homeassistant.exceptions import HomeAssistantError
 from homeassistant.helpers.aiohttp_client import async_get_clientsession
@@ -38,15 +30,9 @@ from homeassistant.helpers.restore_state import RestoreEntity
 from homeassistant.helpers.trigger import PluggableAction
 
 from . import update_client_key
-from .const import (
-    ATTR_PAYLOAD,
-    ATTR_SOUND_OUTPUT,
-    CONF_SOURCES,
-    DATA_CONFIG_ENTRY,
-    DOMAIN,
-    LIVE_TV_APP_ID,
-    WEBOSTV_EXCEPTIONS,
-)
+from .const import (ATTR_PAYLOAD, ATTR_SOUND_OUTPUT, CONF_SOURCES,
+                    DATA_CONFIG_ENTRY, DOMAIN, LIVE_TV_APP_ID,
+                    WEBOSTV_EXCEPTIONS)
 from .triggers.turn_on import async_get_turn_on_trigger
 
 _LOGGER = logging.getLogger(__name__)
@@ -74,7 +60,7 @@ SCAN_INTERVAL = timedelta(seconds=10)
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
-    """Set up the LG webOS Smart TV platform."""
+    """Set up the LG webOS Smart TV Issam platform."""
     client = hass.data[DOMAIN][DATA_CONFIG_ENTRY][entry.entry_id]
     async_add_entities([LgWebOSMediaPlayerEntity(entry, client)])
 
@@ -111,7 +97,7 @@ def cmd(
 
 
 class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
-    """Representation of a LG webOS Smart TV."""
+    """Representation of a LG webOS Smart TV Issam."""
 
     _attr_device_class = MediaPlayerDeviceClass.TV
     _attr_has_entity_name = True
