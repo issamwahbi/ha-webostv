@@ -401,39 +401,20 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
             #     )
             #     return
 
-            # payload = {
-            #     "id": "com.webos.app.music",
-            #     "params": {
-            #         "payload": [
-            #             {
-            #                 "mediaType": "MUSIC",
-            #                 "deviceType": "DMR",
-            #                 "fileName": "Kalimba",  # Display name
-            #                 "fullPath": media_id,   # URL of the media file
-            #                 "dlnaInfo": {
-            #                     "protocolInfo": "http-get:*:audio/mpeg:DLNA.ORG_PN=MP3;DLNA.ORG_OP=01;DLNA.ORG_FLAGS=01500000000000000000000000000000"
-            #                 }
-            #             }
-            #         ]
-            #     }
-            # }
 
-            # # Send the request to launch the Music app
-            # await self._client.request("system.launcher/launch", payload)
-
-            # await self._client.launch_app_with_params(
-            #     "com.webos.app.music",
-            #     {
-            #         "payload": [
-            #             {
-            #                 "fullPath": media_id,
-            #                 "mediaType": "MUSIC",
-            #                 "deviceType": "DMR",
-            #                 "fileName": "track",
-            #             }
-            #         ]
-            #     },
-            # )
+            await self._client.launch_app_with_params(
+                "com.webos.app.mediadiscovery_default",
+                {
+                    "payload": [
+                        {
+                            "fullPath": media_id,
+                            "mediaType": "MUSIC",
+                            "deviceType": "DMR",
+                            "fileName": "track",
+                        }
+                    ]
+                },
+            )
 
             # await self._client.launch_app_with_params(
             #     "com.webos.app.browser",
@@ -441,10 +422,6 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
             #         "target": media_id,
             #     },
             # )
-
-            apps = await self._client.get_apps()
-            for app in apps:
-                _LOGGER.warning(app)
 
         elif media_type == MediaType.CHANNEL:
             _LOGGER.debug("Searching channel")
