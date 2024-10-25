@@ -412,7 +412,7 @@ class LgWebOSMediaPlayerEntity(RestoreEntity, MediaPlayerEntity):
                 ]
             }
 
-            _LOGGER.info(
+            _LOGGER.warning(
                 "%s payload: %s",
                 self._friendly_name_internal(),
                 payload,
